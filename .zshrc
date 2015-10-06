@@ -53,7 +53,6 @@ function mkcd
 # Run tmux if possible and necessary
 if [ "$TMUX" = "" ]; then tmux attach || tmux new; fi
 
-eval "`npm completion`"
+# Enable npm completion if it's installed
+command -v npm >/dev/null 2>&1 && eval "`npm completion`"
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"

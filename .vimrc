@@ -53,8 +53,8 @@ colorscheme hybrid
 set laststatus=2 " For vim-airline to always show status bar.
 let g:airline#extensions#tabline#enabled = 1 " For vim-airline to enable tab/buffer line.
 let g:airline#extensions#tabline#fnamemod = ':t' " For vim-airline just show filename.
-let g:airline_enable_branch     = 1
-let g:airline_enable_syntastic  = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
 "let g:airline_powerline_fonts = 1
 let g:tmuxline_powerline_separators = 0
 
