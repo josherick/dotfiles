@@ -63,9 +63,10 @@ let g:tmuxline_powerline_separators = 0
 nnoremap <silent> <Enter> :<C-u>put =repeat(nr2char(10),v:count)<Bar>execute "'[-1"<CR>
 nnoremap <silent> <S-Enter> :<C-u>put!=repeat(nr2char(10),v:count)<Bar>execute "']+1"<CR>
 
+nnoremap <leader>ts :%s/\s\+$//e<CR>
 
 " <leader>na (non-ascii) highlights non ascii chars.
-"nnoremap <silent> <leader>na :syntax match nonascii "[^\x00-\x7F]" | :highlight nonascii guibg=Red ctermbg=2
+"nnoremap <silent> <leader>na :syntax match nonascii "[^\x00-\x7F]" <CR> | :highlight nonascii guibg=Red ctermbg=2 <CR>
 
 " Removes default s/S functionality, which I personally don't use, but this is
 " not for everyone. Insert character under cursor with s, after with S.
@@ -82,12 +83,18 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>piw "_diwP
 nmap <leader>pib "_dibP
 nmap <leader>pit "_ditP
+nmap <leader>pi{ "_di{P
 nmap <leader>pi} "_di}P
+nmap <leader>pi{ "_di[P
+nmap <leader>pi] "_di]P
 nmap <leader>pi" "_di"P
 nmap <leader>pi' "_di'P
 
 " Insert semicolon at end of line.
 nmap <leader>; A;<C-[>
+
+" Remap Y to be consistent with D, C, etc
+nmap Y y$
 
 
 " Set YCM configuration file.
