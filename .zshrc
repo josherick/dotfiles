@@ -40,6 +40,11 @@ export EDITOR='vim'
 
 export LANG=en_US.UTF-8
 
+if [ -d $HOME/.local ]; then
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.local/lib"
+    export PATH="$PATH:$HOME/.local/bin"
+fi
+
 export TERM="xterm-256color"
 
 alias l="ls -la"

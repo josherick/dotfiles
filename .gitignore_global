@@ -7,6 +7,7 @@
 *.o
 *.so
 *.pyc
+a.out
  
 # Packages #
 ############
@@ -35,7 +36,6 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-
 
 # Vim #
 #######
