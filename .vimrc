@@ -99,9 +99,13 @@ nmap <leader>; A;<C-[>
 " Remap Y to be consistent with D, C, etc
 nmap Y y$
 
+" Shortcut to turn off syntax highlighting for matches
+nmap <leader>n :noh<CR>
+
 
 " Set YCM configuration file.
 let g:ycm_global_ycm_extra_conf = '~/Dropbox/code/.ycm_extra_conf.py'
+let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Werror -Wextra -pedantic'
 
 " Turn off weird JS autocompletion from YouCompleteMe
 let g:ycm_filetype_specific_completion_to_disable = { 'javascript' : 1 }
