@@ -1,6 +1,6 @@
+" Run pathogen (installs, enable plugins)
 execute pathogen#infect()
 
-" Some basic things
 set nocompatible " Disable vi compatibility
 set nostartofline " Don't jump to the start of the line when switching buffers
 syntax on " Syntax highlighting on.
@@ -14,6 +14,7 @@ set undolevels=1000 " Large undo history
 set visualbell " Don't play sounds.
 set noerrorbells " Don't play sounds.
 set wildmenu " Visual autocomplete for command menu
+set noswapfile " Turns off swapfiles
 
 set ignorecase " Must be on for smartcase to work
 set smartcase " Find/Replace: when searching, CIS if all lower, otherwise CS
@@ -85,7 +86,9 @@ nmap <leader>pib "_dibP
 nmap <leader>pit "_ditP
 nmap <leader>pi{ "_di{P
 nmap <leader>pi} "_di}P
-nmap <leader>pi{ "_di[P
+nmap <leader>pi( "_di(P
+nmap <leader>pi) "_di)P
+nmap <leader>pi[ "_di[P
 nmap <leader>pi] "_di]P
 nmap <leader>pi" "_di"P
 nmap <leader>pi' "_di'P
@@ -96,13 +99,9 @@ nmap <leader>; A;<C-[>
 " Remap Y to be consistent with D, C, etc
 nmap Y y$
 
-" Shortcut to turn off syntax highlighting for matches
-nmap <leader>n :noh<CR>
-
 
 " Set YCM configuration file.
 let g:ycm_global_ycm_extra_conf = '~/Dropbox/code/.ycm_extra_conf.py'
-let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Werror -Wextra -pedantic'
 
 " Turn off weird JS autocompletion from YouCompleteMe
 let g:ycm_filetype_specific_completion_to_disable = { 'javascript' : 1 }
