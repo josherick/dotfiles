@@ -33,6 +33,7 @@ set hidden " buffers don't get unloaded, just hidden when they go away
 set cursorline " Highlight the cursor line.
 set scrolloff=5 " Always show 5 lines above/below cursor.
 set colorcolumn=80 " Highlight column 80 as a soft guide.
+set textwidth=0 " Don't automatically wrap
 
 set foldenable " enable folding
 set foldlevelstart=10 " open most folds by default
