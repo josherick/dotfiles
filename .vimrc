@@ -29,6 +29,7 @@ set shiftwidth=4 " Controls indentation with shift >> << commands
 set shiftround " Use multiple of shiftwidth when indenting with < and >
 set smarttab " Insert tabs on the start of line based on shiftwidth, not tabstop
 set hidden " buffers don't get unloaded, just hidden when they go away
+set noexpandtab " Expand tabs into spaces
 
 set cursorline " Highlight the cursor line.
 set scrolloff=5 " Always show 5 lines above/below cursor.
@@ -67,6 +68,9 @@ nnoremap <silent> <S-Enter> :<C-u>put!=repeat(nr2char(10),v:count)<Bar>execute "
 
 nnoremap <leader>ts :%s/\s\+$//e<CR>
 
+" Display current function in status line
+nnoremap <leader>fn :echo cfi#format("%s", "")<CR>
+
 " <leader>na (non-ascii) highlights non ascii chars.
 "nnoremap <silent> <leader>na :syntax match nonascii "[^\x00-\x7F]" <CR> | :highlight nonascii guibg=Red ctermbg=2 <CR>
 
@@ -94,6 +98,11 @@ nmap <leader>pi] "_di]P
 nmap <leader>pi" "_di"P
 nmap <leader>pi' "_di'P
 
+nmap dil ^D
+nmap cil ^C
+nmap yil ^y$
+nmap <leader>pil ^"_Dp
+
 " Insert semicolon at end of line.
 nmap <leader>; A;<C-[>
 
@@ -110,6 +119,13 @@ let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Werror -Wextra -Wno-un
 
 " Turn off weird JS autocompletion from YouCompleteMe
 let g:ycm_filetype_specific_completion_to_disable = { 'javascript' : 1 }
+
+" Turn off 10000 file limit for ctrlp
+let g:ctrlp_max_files = 0
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
 " Turn off autocommenting of next line.
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o

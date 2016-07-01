@@ -27,6 +27,12 @@ RPROMPT="[%*]"
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
+bindkey "^L" forward-word
+bindkey "^H" backward-word
+
+bindkey "^W" forward-word
+bindkey "^B" backward-word
+
 
 # Have LS always display colors
 if ls --color -d ~ >/dev/null 2>&1; then
@@ -40,6 +46,8 @@ export EDITOR='vim'
 
 export LANG=en_US.UTF-8
 
+setopt AUTO_PUSHD
+
 if [ -d $HOME/.local ]; then
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.local/lib"
     export PATH="$PATH:$HOME/.local/bin"
@@ -49,6 +57,18 @@ export TERM="xterm-256color"
 
 alias l="ls -la"
 alias q="exit"
+alias git-graph='git log --graph --oneline --decorate --date=relative --all'
+alias gitdir='git rev-parse --show-toplevel'
+cdgit() { cd $(gitdir)/$1 }
+
+if [[ -d /usr/local/share/zsh-completions ]]; then
+	fpath=(/usr/local/share/zsh-completions $fpath)
+fi
+
+if [[ -d $HOME/.zsh ]]; then
+	fpath=($HOME/.zsh $fpath)
+fi
+
 
 function mkcd
 {
@@ -61,3 +81,6 @@ if [ "$TMUX" = "" ]; then tmux attach || tmux new; fi
 # Enable npm completion if it's installed
 command -v npm >/dev/null 2>&1 && eval "`npm completion`"
 
+export QUALTRICSHOSTNAME='dev.jsherick'
+
+export PATH="$PATH:$HOME/Downloads/AIRSDK_Compiler/bin"
