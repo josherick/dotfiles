@@ -1,0 +1,11 @@
+sjl/gundo.vim
+scrooloose/nerdcommenter
+scrooloose/syntastic
+vim-airline/vim-airline
+vim-airline/vim-airline-themes
+tpope/vim-surround
+junegunn/goyo.vim
+tpope/vim-repeat
+tpope/vim-fugitive
+ctrlpvim/ctrlp.vim
+tyru/current-func-info.vim
