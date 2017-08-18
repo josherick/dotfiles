@@ -62,18 +62,15 @@ alias gitdir='git rev-parse --show-toplevel'
 cdgit() { cd $(gitdir)/$1 }
 
 if [[ -d /usr/local/share/zsh-completions ]]; then
-	fpath=(/usr/local/share/zsh-completions $fpath)
+    fpath=(/usr/local/share/zsh-completions $fpath)
 fi
 
 if [[ -d $HOME/.zsh ]]; then
-	fpath=($HOME/.zsh $fpath)
+    fpath=($HOME/.zsh $fpath)
 fi
 
 
-function mkcd
-{
-  command mkdir $1 && cd $1
-}
+mkcd() { mkdir $1 && cd $1 }
 
 # Run tmux if possible and necessary
 if [ "$TMUX" = "" ]; then tmux attach || tmux new; fi
@@ -81,6 +78,18 @@ if [ "$TMUX" = "" ]; then tmux attach || tmux new; fi
 # Enable npm completion if it's installed
 command -v npm >/dev/null 2>&1 && eval "`npm completion`"
 
-export QUALTRICSHOSTNAME='dev.jsherick'
+export PATH="$PATH:/usr/local/go/bin"
 
-export PATH="$PATH:$HOME/Downloads/AIRSDK_Compiler/bin"
+# Create a vimin function to accept files to be piped into vim, whether we are
+# using BSD xargs or GNU xargs
+if eval "true | xargs -o true > /dev/null 2>&1"; then
+    # BSD
+    vimin() { xargs -o vim }
+else
+    # GNU
+    vimin() { xargs sh -c 'vim "$@" < /dev/tty' vim; }
+fi
+
+if [[ $(hostname -s) = *qualtrics* ]] && [ -f "$HOME/.zshrc_qualtrics" ]; then
+    source "$HOME/.zshrc_qualtrics"
+fi

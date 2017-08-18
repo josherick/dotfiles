@@ -20,7 +20,7 @@ set ignorecase " Must be on for smartcase to work
 set smartcase " Find/Replace: when searching, CIS if all lower, otherwise CS
 set incsearch " Show search matches as you type
 
-set expandtab " Expand tabs into spaces
+"set expandtab " Expand tabs into spaces
 set tabstop=4 " 4 spaces inserted when tab is pressed
 set softtabstop=4 " Set equal to tabstop to ensure use of spaces instead of tabs
 set autoindent " Autoindent when hitting return.
@@ -29,7 +29,7 @@ set shiftwidth=4 " Controls indentation with shift >> << commands
 set shiftround " Use multiple of shiftwidth when indenting with < and >
 set smarttab " Insert tabs on the start of line based on shiftwidth, not tabstop
 set hidden " buffers don't get unloaded, just hidden when they go away
-set noexpandtab " Expand tabs into spaces
+set noexpandtab " Don't expand tabs into spaces
 
 set cursorline " Highlight the cursor line.
 set scrolloff=5 " Always show 5 lines above/below cursor.
@@ -98,6 +98,7 @@ nmap <leader>pi] "_di]P
 nmap <leader>pi" "_di"P
 nmap <leader>pi' "_di'P
 
+" Add d, c, y, and p behavior for inner lines
 nmap dil ^D
 nmap cil ^C
 nmap yil ^y$
@@ -112,6 +113,24 @@ nmap Y y$
 " Shortcut to turn off syntax highlighting for matches
 nmap <leader>n :noh<CR>
 
+" Functions to enable and disable word wrap
+function WordWrap()
+	:set wrap
+	:set linebreak
+	nmap j gj
+	nmap k gk
+endfunction
+
+function NoWordWrap()
+	:set nowrap
+	:set nolinebreak
+	nmap j j
+	nmap k k
+endfunction
+
+nmap <leader>ww :call WordWrap()<CR>
+nmap <leader>nww :call NoWordWrap()<CR>
+
 
 " Set YCM configuration file.
 let g:ycm_global_ycm_extra_conf = '~/Dropbox/code/.ycm_extra_conf.py'
@@ -123,10 +142,13 @@ let g:ycm_filetype_specific_completion_to_disable = { 'javascript' : 1 }
 " Turn off 10000 file limit for ctrlp
 let g:ctrlp_max_files = 0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+
+" Prefer ag for various things if available.
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
+  let g:ackprg = 'ag --vimgrep'
 
+endif
 " Turn off autocommenting of next line.
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
