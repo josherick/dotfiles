@@ -1,0 +1,32 @@
+# react
+snippet presentor "presentation component" b
+import React from 'react'
+const `!p snip.rv=snip.basename` = ($1) => (
+	$2
+)
+
+export default `!p snip.rv=snip.basename`
+endsnippet
+
+snippet PropTypes "common proptypes" w
+PropTypes.$1.isRequired
+endsnippet
+
+snippet container "container component" b
+import { connect } from 'react-redux'
+
+const mapStateToProps = (state) => {
+	return ${1:state}
+}
+
+const mapDispatchToProps = () => {
+	return ${2:\{\}}
+}
+
+const `!p snip.rv=snip.basename` = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)($3)
+
+export default `!p snip.rv=snip.basename`
+endsnippet

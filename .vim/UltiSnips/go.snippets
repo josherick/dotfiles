@@ -1,0 +1,35 @@
+snippet Recognizer "Recognizer" b
+func $1(in []byte) (bool, int) {
+	return $2(in)
+}
+endsnippet
+
+snippet Test "a test harness" b
+import (
+	"testing"
+)
+type ${2:testcase} []struct {
+	name           string
+}{
+}
+
+func Test$1(t *testing.T) {
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			// setup
+
+			// assertions
+
+		})
+	}
+}
+endsnippet
+
+snippet TestHandler "setup for a handler test" b
+handler := /* ... */
+request := httptest.NewRequest("GET", "route", nil)
+response := httptest.NewRecorder()
+params := httprouter.Params([]httprouter.Param{})
+handler(response, request, params)
+endsnippet

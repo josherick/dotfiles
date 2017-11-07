@@ -1,0 +1,99 @@
+snippet log "console.log" b
+console.log($1);
+endsnippet
+
+snippet f "anonymous function" w
+function ($1) {
+	$2
+}
+endsnippet
+
+snippet f; "anonymous function as argument" w
+function ($1) {
+	$2
+});
+endsnippet
+
+snippet fn "named function" w
+function $1($2) {
+	$3
+}
+endsnippet
+
+snippet desc "describe block" b
+describe('$1', function () {
+	$2
+});
+endsnippet
+
+snippet it "it block" b
+it('$1', function () {
+	$2
+});
+endsnippet
+
+snippet IIFE "IIFE" b
+(function ($2) {
+	$3
+})($1);
+endsnippet
+
+snippet module "angular module" b
+(function(){
+	'use strict';
+	angular.module('$1')
+		.$2('$3', $4);
+	$4.$inject = [];
+	function $4 ($5){
+		$6
+	}
+})();
+endsnippet
+
+snippet decorator "a provide decorator" b
+$provide.decorator('$1', ['$delegate',
+	function($delegate){
+		$2
+		return $delegate;
+	}]);
+endsnippet
+
+snippet .then "promise.then" i
+.then(function ($1) {
+	$2
+})$3
+endsnippet
+
+snippet .catch "promise.catch" i
+.catch(function ($1) {
+	$2
+})$3
+endsnippet
+
+snippet : "object property" b
+$1: $1,
+endsnippet
+
+snippet directive "a directive" b
+const templateUrl = require('${2:path/to/template.html}');
+
+angular.module('cp.surveys.myprojects')
+	.directive('${1:directiveName}', $1Directive);
+
+$1Directive.$inject = [];
+function $1Directive() {
+	return {
+		templateUrl: templateUrl,
+	};
+}
+endsnippet
+
+snippet controller "a controller" b
+angular.module('${2:cp.surveys.myprojects}')
+	.controller('${1:Controller}', $1);
+$1.$inject = [];
+
+function $1() {
+	var vm = this;
+}
+endsnippet

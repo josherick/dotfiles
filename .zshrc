@@ -1,5 +1,4 @@
 autoload -U colors && colors
-# The following lines were added by compinstall
 
 zstyle ':completion:*' completer _expand _complete _ignored _correct
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*'
@@ -7,15 +6,22 @@ zstyle :compinstall filename '/home/joshsherick/.zshrc'
 
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
-# Lines configured by zsh-newuser-install
+
 HISTFILE=~/.histfile
-HISTSIZE=1000
+HISTSIZE=5000
 SAVEHIST=5000
-setopt appendhistory
-unsetopt autocd beep
+setopt incappendhistory
+setopt histignoredups
+setopt autocd
+setopt ignoreeof
+unsetopt beep
 bindkey -e
-# End of lines configured by zsh-newuser-install
+
+# Edit in vim with C-e C-e
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^e^e" edit-command-line
+
 
 setopt extended_glob
 
@@ -90,6 +96,11 @@ else
     vimin() { xargs sh -c 'vim "$@" < /dev/tty' vim; }
 fi
 
-if [[ $(hostname -s) = *qualtrics* ]] && [ -f "$HOME/.zshrc_qualtrics" ]; then
-    source "$HOME/.zshrc_qualtrics"
+if [ -f "$HOME/.qualtrics.zsh" ]; then
+    source "$HOME/.qualtrics.zsh"
+fi
+
+if [ -f ~/.fzf.zsh ]; then
+    source ~/.fzf.zsh
+    export FZF_DEFAULT_COMMAND='rg --files --color never'
 fi

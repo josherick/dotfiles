@@ -1,0 +1,70 @@
+snippet describe "describe block" b
+describe('${1:behavior}', function($3){
+	${2://tests}
+});
+endsnippet
+
+snippet it "it block" b
+it('${1:behavior}', function($3){
+	${2://test}
+});
+endsnippet
+
+snippet after "afterEach block" b
+afterEach(function(){
+	${1://setup}
+});
+endsnippet
+
+snippet before "beforeEach block" b
+beforeEach(function(){
+	${1://setup}
+});
+endsnippet
+
+snippet _ "inject assignment" b
+${1} = _$1_;
+endsnippet
+
+snippet module "test module" b
+module('${1:moduleName}', function($provide) {
+	${2}
+});
+endsnippet
+
+snippet test "Mocha File Setup" b
+describe('${1:File-to-Test}', function() {
+	'use strict';
+	var sandbox;
+
+	var $1;
+	beforeEach(function() {
+		sandbox = sinon.sandbox.create();
+		inject(function(_$1_) {
+				$1 = _$1_;
+		});
+	});
+
+	${2:IT}
+});
+endsnippet
+
+snippet directive "test a directive" b
+describe('${1:directiveName}', function() {
+	var $compile,
+		$rootScope;
+
+	beforeEach(function () {
+		module('${2:module}')
+		inject(function(_$compile_, _$rootScope_){
+			$compile = _$compile_;
+			$rootScope = _$rootScope_;
+		})
+	});
+
+	function compile() {
+		var element = $compile("<a-great-eye></a-great-eye>")($rootScope);
+		$rootScope.$digest();
+	}
+});
+endsnippet
