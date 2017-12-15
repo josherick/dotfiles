@@ -20,6 +20,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
+Plug 'leafgarland/typescript-vim'
 
 " Initialize plugin system
 call plug#end()

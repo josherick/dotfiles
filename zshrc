@@ -26,7 +26,7 @@ bindkey "^e^e" edit-command-line
 setopt extended_glob
 
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="white"; fi
-PROMPT="%{$fg[$NCOLOR]%}%B%n%b@%m%{$reset_color%}:%{$fg[blue]%}%B%c%b%{$reset_color%} %(!.#.$) "
+PROMPT="%F{024}%B%n%b%{$reset_color%}:%F{255}%B%c%b%{$reset_color%} %(!.#.$) "
 RPROMPT="[%*]"
 
 # Easily scroll up and down through matches when searching history
@@ -96,11 +96,15 @@ else
     vimin() { xargs sh -c 'vim "$@" < /dev/tty' vim; }
 fi
 
-if [ -f "$HOME/.qualtrics.zsh" ]; then
-    source "$HOME/.qualtrics.zsh"
+if [ -f "$HOME/.zsh/.qualtrics.zsh" ]; then
+    source "$HOME/.zsh/qualtrics.zsh"
 fi
 
-if [ -f ~/.fzf.zsh ]; then
-    source ~/.fzf.zsh
+if [ -f "$HOME/.zsh/.git_prompt.zsh" ]; then
+    source "$HOME/.zsh/git_prompt.zsh"
+fi
+
+if [ -f "$HOME/.zsh/.fzf.zsh" ]; then
+    source "$HOME/.zsh/fzf.zsh"
     export FZF_DEFAULT_COMMAND='rg --files --color never'
 fi
