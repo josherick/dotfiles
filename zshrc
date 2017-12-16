@@ -96,15 +96,15 @@ else
     vimin() { xargs sh -c 'vim "$@" < /dev/tty' vim; }
 fi
 
-if [ -f "$HOME/.zsh/.qualtrics.zsh" ]; then
-    source "$HOME/.zsh/qualtrics.zsh"
+if [ -d "$HOME/.zsh/device-specific" ]; then
+    for f in ~/.zsh/device-specific/*; do source $f; done
 fi
 
-if [ -f "$HOME/.zsh/.git_prompt.zsh" ]; then
+if [ -f "$HOME/.zsh/git_prompt.zsh" ]; then
     source "$HOME/.zsh/git_prompt.zsh"
 fi
 
-if [ -f "$HOME/.zsh/.fzf.zsh" ]; then
+if [ -f "$HOME/.zsh/fzf.zsh" ] && (( $+commands[fzf] )); then
     source "$HOME/.zsh/fzf.zsh"
     export FZF_DEFAULT_COMMAND='rg --files --color never'
 fi
