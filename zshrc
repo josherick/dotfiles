@@ -113,10 +113,9 @@ if [ -f "$ZSH_DIR/fzf.zsh" ] && (( $+commands[fzf] )); then
         # Based off of http://owen.cymru/sf-a-quick-way-to-search-for-some-thing-in-bash-and-edit-it-with-vim-2/
         if [ "$#" -lt 1 ]; then echo "Supply a search string."; return 1; fi
         SEARCH=$@
-        RG_COMMAND='rg --column --line-number --no-heading --smart-case --follow --color=always'
+        RG_COMMAND='rg --column --line-number --no-heading --smart-case --follow --color always'
         AG_COMMAND='ag --column --line-number --no-heading --color --no-break'
         SEARCH_COMMAND="$AG_COMMAND $SEARCH"
-        echo $SEARCH_COMMAND
         FILES=`eval $SEARCH_COMMAND | fzf --ansi --multi --reverse --height=40 | awk -F ':' '{print "\""$1":"$2":"$3"\""}' | tr '\n' ' '`
         if [[ -n "$FILES" ]]; then eval "vim $FILES"; fi
     }
