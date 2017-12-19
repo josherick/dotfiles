@@ -21,6 +21,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
 Plug 'leafgarland/typescript-vim'
+Plug 'kopischke/vim-fetch'
 
 " Initialize plugin system
 call plug#end()
