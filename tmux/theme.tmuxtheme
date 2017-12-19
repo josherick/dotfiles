@@ -44,7 +44,7 @@ set -g window-status-activity-fg colour233 # a bug in tmux
 set -g window-status-separator ""
 
 # Window status alignment
-#set -g status-justify centre
+set -g status-justify centre
 
 # Pane border
 set -g pane-border-bg default
