@@ -59,7 +59,11 @@ if [ -d $HOME/.local ]; then
     export PATH="$PATH:$HOME/.local/bin"
 fi
 
-export TERM="xterm-256color"
+if [ -d /usr/local/bin ]; then
+    export PATH="$PATH:/usr/local/bin"
+fi
+
+export TERM="screen-256color"
 
 alias l="ls -la"
 alias q="exit"
