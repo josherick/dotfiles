@@ -82,8 +82,10 @@ fi
 
 mkcd() { mkdir $1 && cd $1 }
 
-# Run tmux if possible and necessary
-if [ "$TMUX" = "" ]; then tmux attach || tmux new; fi
+# Run and/or attach to tmux if it's installed and we're not already in it.
+if [ "$TMUX" = "" ] && (( $+commands[tmux] )); then
+    tmux attach || tmux new;
+fi
 
 # Enable npm completion if it's installed
 command -v npm >/dev/null 2>&1 && eval "`npm completion`"
