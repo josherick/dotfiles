@@ -24,6 +24,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'kopischke/vim-fetch'
 Plug 'othree/yajs.vim'
 Plug 'tpope/vim-vinegar'
+Plug 'easymotion/vim-easymotion'
 
 " Initialize plugin system
 call plug#end()
