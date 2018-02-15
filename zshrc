@@ -82,6 +82,8 @@ fi
 
 mkcd() { mkdir $1 && cd $1 }
 
+up() { cd $(printf "%0.s../" $(seq 1 $1 )) }
+
 # Run and/or attach to tmux if it's installed and we're not already in it.
 if [ "$TMUX" = "" ] && (( $+commands[tmux] )); then
     tmux attach || tmux new;

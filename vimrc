@@ -22,6 +22,8 @@ Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
 Plug 'leafgarland/typescript-vim'
 Plug 'kopischke/vim-fetch'
+Plug 'othree/yajs.vim'
+Plug 'tpope/vim-vinegar'
 
 " Initialize plugin system
 call plug#end()
@@ -96,9 +98,9 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:tmuxline_powerline_separators = 0
 
 " UltiSnips configuration
-let g:UltiSnipsExpandTrigger="<c-y>"
-let g:UltiSnipsJumpForwardTrigger="<c-i>"
-let g:UltiSnipsJumpBackwardTrigger="<c-t>"
+"let g:UltiSnipsExpandTrigger="<C-s>"
+"let g:UltiSnipsJumpForwardTrigger="<C-j>"
+"let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 " Enter and Shift-Enter add new lines before and after, with count.
 nnoremap <silent> <Enter> :<C-u>put =repeat(nr2char(10),v:count)<Bar>execute "'[-1"<CR>
@@ -175,6 +177,8 @@ endfunction
 
 nmap <leader>ww :call WordWrap()<CR>
 nmap <leader>nww :call NoWordWrap()<CR>
+
+command! GitlabUrl silent execute '!source ~/.zshrc && gitlab_url ' . expand('%') . ':' . line('.') . ' | pbcopy' | execute ':redraw!'
 
 " Reload .vimrc
 nmap <leader>rr :source $MYVIMRC<CR>
