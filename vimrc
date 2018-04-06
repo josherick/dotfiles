@@ -9,7 +9,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'sjl/gundo.vim'
 Plug 'SirVer/ultisnips'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
@@ -100,8 +100,8 @@ let g:tmuxline_powerline_separators = 0
 
 " UltiSnips configuration
 "let g:UltiSnipsExpandTrigger="<C-s>"
-"let g:UltiSnipsJumpForwardTrigger="<C-j>"
-"let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 " Enter and Shift-Enter add new lines before and after, with count.
 nnoremap <silent> <Enter> :<C-u>put =repeat(nr2char(10),v:count)<Bar>execute "'[-1"<CR>
@@ -159,7 +159,15 @@ nmap <leader>n :noh<CR>
 " Search filenames only
 command! -complete=dir Filenames call fzf#run(fzf#wrap({ 'options': "-d'/' -n -1 -m" }))
 nmap <C-p> :Filenames<CR>
-nmap <C-l> :Files<CR>
+nmap <C-l> :Tags<CR>
+
+
+" easymotion
+nmap f <Plug>(easymotion-f)
+nmap F <Plug>(easymotion-F)
+nmap t <Plug>(easymotion-t)
+nmap T <Plug>(easymotion-T)
+let g:EasyMotion_smartcase = 1
 
 " Functions to enable and disable word wrap
 function! WordWrap()
@@ -179,7 +187,7 @@ endfunction
 nmap <leader>ww :call WordWrap()<CR>
 nmap <leader>nww :call NoWordWrap()<CR>
 
-command! GitlabUrl silent execute '!source ~/.zshrc && gitlab_url ' . expand('%') . ':' . line('.') . ' | pbcopy' | execute ':redraw!'
+command! GitlabUrl silent execute '!source ~/.zshrc && gitlab-url ' . expand('%') . ':' . line('.') . ' | pbcopy' | execute ':redraw!'
 
 " Reload .vimrc
 nmap <leader>rr :source $MYVIMRC<CR>
@@ -232,4 +240,7 @@ command! Wsudo w !sudo tee % > /dev/null
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Switch CWD to gitdir
+map <leader>gcd :Gcd<cr>
 

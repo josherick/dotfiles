@@ -3,7 +3,6 @@ autoload -U colors && colors
 zstyle ':completion:*' completer _expand _complete _ignored _correct
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*'
 zstyle :compinstall filename '/home/joshsherick/.zshrc'
-
 autoload -Uz compinit
 compinit
 
@@ -21,7 +20,6 @@ bindkey -e
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^e^e" edit-command-line
-
 
 setopt extended_glob
 
@@ -54,6 +52,7 @@ export LANG=en_US.UTF-8
 
 setopt AUTO_PUSHD
 
+
 if [ -d $HOME/.local ]; then
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.local/lib"
     export PATH="$PATH:$HOME/.local/bin"
@@ -69,6 +68,7 @@ alias l="ls -la"
 alias q="exit"
 alias git-graph='git log --graph --oneline --decorate --date=relative --all'
 alias gitdir='git rev-parse --show-toplevel'
+alias gitchanged='{ git diff --name-only ; git diff --name-only --staged ; git ls-files --other --exclude-standard } | sort | uniq'
 cdgit() { cd $(gitdir)/$1 }
 
 if [[ -d /usr/local/share/zsh-completions ]]; then
@@ -79,20 +79,11 @@ if [[ -d $HOME/.zsh ]]; then
     fpath=($HOME/.zsh $fpath)
 fi
 
+export PATH="$PATH:/usr/local/go/bin"
 
 mkcd() { mkdir $1 && cd $1 }
 
 up() { cd $(printf "%0.s../" $(seq 1 $1 )) }
-
-# Run and/or attach to tmux if it's installed and we're not already in it.
-if [ "$TMUX" = "" ] && (( $+commands[tmux] )); then
-    tmux attach || tmux new;
-fi
-
-# Enable npm completion if it's installed
-command -v npm >/dev/null 2>&1 && eval "`npm completion`"
-
-export PATH="$PATH:/usr/local/go/bin"
 
 # Create a vimin function to accept files to be piped into vim, whether we are
 # using BSD xargs or GNU xargs
@@ -104,8 +95,8 @@ else
     vimin() { xargs sh -c 'vim "$@" < /dev/tty' vim; }
 fi
 
-ZSH_DIR="$HOME/.zsh"
 
+ZSH_DIR="$HOME/.zsh"
 if [ -d "$ZSH_DIR/device-specific" ]; then
     for f in $ZSH_DIR/device-specific/*; do source $f; done
 fi
@@ -127,4 +118,9 @@ if [ -f "$ZSH_DIR/fzf.zsh" ] && (( $+commands[fzf] )); then
         FILES=`eval $SEARCH_COMMAND | fzf --ansi --multi --reverse --height=40 | awk -F ':' '{print "\""$1":"$2":"$3"\""}' | tr '\n' ' '`
         if [[ -n "$FILES" ]]; then eval "vim $FILES"; fi
     }
+fi
+
+# Run and/or attach to tmux if it's installed and we're not already in it.
+if [ "$TMUX" = "" ] && (( $+commands[tmux] )); then
+	tmux attach || tmux new;
 fi
