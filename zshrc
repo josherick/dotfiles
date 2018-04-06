@@ -85,6 +85,8 @@ mkcd() { mkdir $1 && cd $1 }
 
 up() { cd $(printf "%0.s../" $(seq 1 $1 )) }
 
+trim() { ex +'bufdo!%s/\s\+$//e' -cxa $* }
+
 # Create a vimin function to accept files to be piped into vim, whether we are
 # using BSD xargs or GNU xargs
 if eval "true | xargs -o true > /dev/null 2>&1"; then
