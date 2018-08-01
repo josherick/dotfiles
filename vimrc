@@ -9,7 +9,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'sjl/gundo.vim'
 Plug 'SirVer/ultisnips'
 Plug 'scrooloose/nerdcommenter'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
@@ -23,8 +23,11 @@ Plug 'xolox/vim-misc'
 Plug 'leafgarland/typescript-vim'
 Plug 'kopischke/vim-fetch'
 Plug 'othree/yajs.vim'
-Plug 'tpope/vim-vinegar'
 Plug 'easymotion/vim-easymotion'
+Plug 'scrooloose/nerdtree'
+"Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'danro/rename.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -83,6 +86,17 @@ set clipboard=unnamed " Use system clipboard, CHANGE TO unnamedplus FOR LINUX
 set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
 
+" Attempt to make vim faster.
+set redrawtime=3000
+set lazyredraw
+" 'Hybrid' https://jeffkreeftmeijer.com/vim-number/
+set number relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
 let mapleader = ','
 
 set guifont=Menlo:h12
@@ -90,13 +104,26 @@ set guifont=Menlo:h12
 "set background=dark
 colorscheme hybrid
 
+let g:ale_linters = {
+\   'php': [],
+\}
+
 set laststatus=2 " For vim-airline to always show status bar.
-let g:airline#extensions#tabline#enabled = 1 " For vim-airline to enable tab/buffer line.
-let g:airline#extensions#tabline#fnamemod = ':t' " For vim-airline just show filename.
 let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
-"let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
 let g:tmuxline_powerline_separators = 0
+let g:airline#extensions#tabline#enabled = 1 " For vim-airline to enable tab/buffer line.
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
 
 " UltiSnips configuration
 "let g:UltiSnipsExpandTrigger="<C-s>"
@@ -120,6 +147,10 @@ nnoremap <leader>fn :echo cfi#format("%s", "")<CR>
 nnoremap s :exec "normal i".nr2char(getchar())."\e"<CR>
 nnoremap S :exec "normal a".nr2char(getchar())."\e"<CR>
 
+" Insert a character at the end of the line.
+nmap <leader>e :exec "s/$/".nr2char(getchar())<CR>
+
+
 " Add keymaps to switch buffers back and forth and stuff
 nmap <leader>. :bprevious<CR>
 nmap <leader>/ :bnext<CR>
@@ -138,6 +169,7 @@ nmap <leader>pi[ "_di[P
 nmap <leader>pi] "_di]P
 nmap <leader>pi" "_di"P
 nmap <leader>pi' "_di'P
+nmap <leader>pi` "_di`P
 
 " Add d, c, y, and p behavior for inner lines
 nmap dil ^D
@@ -145,28 +177,27 @@ nmap cil ^C
 nmap yil ^y$
 nmap <leader>pil ^"_Dp
 
-" Insert semicolon at end of line.
-nmap <leader>; A;<C-[>
-
 " Remap Y to be consistent with D, C, etc
 nmap Y y$
 
 " Shortcut to turn off syntax highlighting for matches
 nmap <leader>n :noh<CR>
 
+" Shortcut to format file as json with json.tool
+nmap <leader>fj :%!python -m json.tool<CR>
 
 " fzf
 " Search filenames only
-command! -complete=dir Filenames call fzf#run(fzf#wrap({ 'options': "-d'/' -n -1 -m" }))
-nmap <C-p> :Filenames<CR>
-nmap <C-l> :Tags<CR>
+command! Filenames call fzf#run(fzf#wrap())
+command! -bang -nargs=* GFilenames call fzf#vim#gitfiles(<q-args>, { 'options': ["-d", "/", "-n", "-1", "-m", "--prompt", "GFilenames\> ", "--preview", "head -$LINES {}"] }, <bang>0)
+command! -bang -nargs=* TagsJump call fzf#vim#tags(expand('<cword>'), {'options': '--exact --select-1 --exit-0'}, <bang>0)
+nmap <C-p> :GFilenames<CR>
+nmap <C-l> :GFiles<CR>
+nmap <leader>gs :GFiles?<CR>
+nmap <C-]> :TagsJump<CR>
 
 
 " easymotion
-nmap f <Plug>(easymotion-f)
-nmap F <Plug>(easymotion-F)
-nmap t <Plug>(easymotion-t)
-nmap T <Plug>(easymotion-T)
 let g:EasyMotion_smartcase = 1
 
 " Functions to enable and disable word wrap
@@ -203,11 +234,6 @@ let g:ycm_filetype_specific_completion_to_disable = { 'javascript' : 1 }
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
 
-" Turn off 10000 file limit for ctrlp
-let g:ctrlp_max_files = 0
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_open_multiple_files = 'ij'
-
 " Prefer ag for various things if available.
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -232,6 +258,16 @@ endif
 " Necesarry for nerdcommenter
 filetype plugin on
 
+" Turn on autocomplete
+set omnifunc=syntaxcomplete#Complete
+set completeopt+=longest,menuone
+autocmd CompleteDone * pclose
+inoremap <C-n> <c-x><c-o>
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" vim-go window only show first error
+let g:go_list_height = 2
+
 " :W maps to w so if shift is still being held when typing w, it works
 command! W w
 
@@ -239,7 +275,7 @@ command! W w
 command! Wsudo w !sudo tee % > /dev/null
 
 " Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+map <leader>cd :Gcd<cr>:pwd<cr>
 
 " Switch CWD to gitdir
 map <leader>gcd :Gcd<cr>

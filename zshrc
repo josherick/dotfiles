@@ -71,6 +71,28 @@ alias gitdir='git rev-parse --show-toplevel'
 alias gitchanged='{ git diff --name-only ; git diff --name-only --staged ; git ls-files --other --exclude-standard } | sort | uniq'
 cdgit() { cd $(gitdir)/$1 }
 
+function gentags {
+    local COMMAND="ctags"
+    if [[ $PWD = $GOPATH* ]]; then
+        if (( $+commands[gotags] )); then
+            COMMAND="gotags"
+        else
+            echo "You may want to install gotags for proper golang tag generation."
+        fi
+    fi
+
+    $COMMAND -R -f ./.git/tags .
+}
+
+function multised {
+    [ "$#" -eq 2 ] || (echo "Usage: $0 file_suffix sed_command" && return 1)
+
+    local files=`find . -type f -name "*$1" -not -path "*/.git/*"`
+    echo $files
+
+    sed -i '' $2 $(echo $files | tr '\n' ' ')
+}
+
 if [[ -d /usr/local/share/zsh-completions ]]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
@@ -82,6 +104,8 @@ fi
 export PATH="$PATH:/usr/local/go/bin"
 
 mkcd() { mkdir $1 && cd $1 }
+
+cpvim() { cp $1 $2 && vim $2 }
 
 up() { cd $(printf "%0.s../" $(seq 1 $1 )) }
 
