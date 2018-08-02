@@ -9,7 +9,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'sjl/gundo.vim'
 Plug 'SirVer/ultisnips'
 Plug 'scrooloose/nerdcommenter'
-"Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
@@ -192,7 +192,7 @@ command! Filenames call fzf#run(fzf#wrap())
 command! -bang -nargs=* GFilenames call fzf#vim#gitfiles(<q-args>, { 'options': ["-d", "/", "-n", "-1", "-m", "--prompt", "GFilenames\> ", "--preview", "head -$LINES {}"] }, <bang>0)
 command! -bang -nargs=* TagsJump call fzf#vim#tags(expand('<cword>'), {'options': '--exact --select-1 --exit-0'}, <bang>0)
 nmap <C-p> :GFilenames<CR>
-nmap <C-l> :GFiles<CR>
+nmap <C-l> :Files<CR>
 nmap <leader>gs :GFiles?<CR>
 nmap <C-]> :TagsJump<CR>
 
