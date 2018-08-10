@@ -171,6 +171,12 @@ nmap <leader>pi" "_di"P
 nmap <leader>pi' "_di'P
 nmap <leader>pi` "_di`P
 
+" Add di" etc for underscores
+"nmap di_ F_dt"
+"nmap ci_ F_ct"
+"nmap yi_ F_yt"
+"nmap <leader>pi_ F_"_dt"P
+
 " Add d, c, y, and p behavior for inner lines
 nmap dil ^D
 nmap cil ^C
@@ -197,8 +203,38 @@ nmap <leader>gs :GFiles?<CR>
 nmap <C-]> :TagsJump<CR>
 
 
-" easymotion
+" easymotion, ugh
+nmap f <Plug>(easymotion-fl)
+nmap F <Plug>(easymotion-Fl)
+nmap t <Plug>(easymotion-tl)
+nmap T <Plug>(easymotion-Tl)
+
+nmap yf y<Plug>(easymotion-fl)
+nmap yF y<Plug>(easymotion-Fl)
+nmap yt y<Plug>(easymotion-tl)
+nmap yT y<Plug>(easymotion-Tl)
+
+nmap df d<Plug>(easymotion-fl)
+nmap dF d<Plug>(easymotion-Fl)
+nmap dt d<Plug>(easymotion-tl)
+nmap dT d<Plug>(easymotion-Tl)
+
 let g:EasyMotion_smartcase = 1
+
+nnoremap <Leader><Leader>f f
+nnoremap <Leader><Leader>F F
+nnoremap <Leader><Leader>t t
+nnoremap <Leader><Leader>T T
+
+nnoremap <Leader><Leader>yf yf
+nnoremap <Leader><Leader>yF yF
+nnoremap <Leader><Leader>yt yt
+nnoremap <Leader><Leader>yT yT
+
+nnoremap <Leader><Leader>df df
+nnoremap <Leader><Leader>dF dF
+nnoremap <Leader><Leader>dt dt
+nnoremap <Leader><Leader>dT dT
 
 " Functions to enable and disable word wrap
 function! WordWrap()
@@ -220,8 +256,22 @@ nmap <leader>nww :call NoWordWrap()<CR>
 
 command! GitlabUrl silent execute '!source ~/.zshrc && gitlab-url ' . expand('%') . ':' . line('.') . ' | pbcopy' | execute ':redraw!'
 
+
+function! GitlabLog()
+	if mode() == 'n' || mode() == 'v'
+		silent execute '!echo ''git log -L' . line("'<") . ',' . line("'>") . ':' . expand('%') . ''' | pbcopy' | execute ':redraw!'
+	else
+		silent execute '!echo ''git log -L' . line(".") . ',' . line(".") . ':' . expand('%') . ''' | pbcopy' | execute ':redraw!'
+	endif
+endfunction
+
+command! GitlabLog :call GitlabLog()
+
 " Reload .vimrc
 nmap <leader>rr :source $MYVIMRC<CR>
+
+" Print full file path
+nmap <leader>pwd :echo expand('%:p')<CR>
 
 " Set YCM configuration file.
 let g:ycm_global_ycm_extra_conf = '~/Dropbox/code/.ycm_extra_conf.py'
