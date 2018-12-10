@@ -8,3 +8,4 @@ tmux/tmux-themepack
 
 vim/autoload
 !vim/plug.vim
+.DS_Store
