@@ -104,6 +104,7 @@ set guifont=Menlo:h12
 "set background=dark
 colorscheme hybrid
 
+map <leader>at :ALEToggle<CR>
 let g:ale_linters = {
 \   'php': [],
 \}
@@ -158,18 +159,10 @@ nmap <leader>t :enew<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
 
 " Clear word, brackets, curly braces, quotes and paste
-nmap <leader>piw "_diwP
-nmap <leader>pib "_dibP
-nmap <leader>pit "_ditP
-nmap <leader>pi{ "_di{P
-nmap <leader>pi} "_di}P
-nmap <leader>pi( "_di(P
-nmap <leader>pi) "_di)P
-nmap <leader>pi[ "_di[P
-nmap <leader>pi] "_di]P
-nmap <leader>pi" "_di"P
-nmap <leader>pi' "_di'P
-nmap <leader>pi` "_di`P
+for c in ['w', 'b', 't', '{', '}', '(', ')', '[', ']', '"', '''', '`']
+  execute "nmap <leader>pi" . c . " \"_di" . c . "P"
+  execute "nmap <leader>pvi" . c . " vi" . c . "pgvy"
+endfor
 
 " Add di" etc for underscores
 "nmap di_ F_dt"
@@ -204,20 +197,25 @@ nmap <C-]> :TagsJump<CR>
 
 
 " easymotion, ugh
-nmap f <Plug>(easymotion-fl)
-nmap F <Plug>(easymotion-Fl)
-nmap t <Plug>(easymotion-tl)
-nmap T <Plug>(easymotion-Tl)
+map f <Plug>(easymotion-fl)
+map F <Plug>(easymotion-Fl)
+map t <Plug>(easymotion-tl)
+map T <Plug>(easymotion-Tl)
 
-nmap yf y<Plug>(easymotion-fl)
-nmap yF y<Plug>(easymotion-Fl)
-nmap yt y<Plug>(easymotion-tl)
-nmap yT y<Plug>(easymotion-Tl)
+map yf y<Plug>(easymotion-fl)
+map yF y<Plug>(easymotion-Fl)
+map yt y<Plug>(easymotion-tl)
+map yT y<Plug>(easymotion-Tl)
 
-nmap df d<Plug>(easymotion-fl)
-nmap dF d<Plug>(easymotion-Fl)
-nmap dt d<Plug>(easymotion-tl)
-nmap dT d<Plug>(easymotion-Tl)
+map df d<Plug>(easymotion-fl)
+map dF d<Plug>(easymotion-Fl)
+map dt d<Plug>(easymotion-tl)
+map dT d<Plug>(easymotion-Tl)
+
+map cf d<Plug>(easymotion-fl)
+map cF c<Plug>(easymotion-Fl)
+map ct c<Plug>(easymotion-tl)
+map cT c<Plug>(easymotion-Tl)
 
 let g:EasyMotion_smartcase = 1
 
