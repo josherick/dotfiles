@@ -1,5 +1,6 @@
 autoload -U colors && colors
 
+fpath=($HOME/.zsh/completion $fpath)
 zstyle ':completion:*' completer _expand _complete _ignored _correct
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*'
 zstyle :compinstall filename '/home/joshsherick/.zshrc'
@@ -81,7 +82,7 @@ function gentags {
         fi
     fi
 
-    $COMMAND -R -f ./.git/tags .
+    $COMMAND -R -f ./.git/tags --tag-relative=yes .
 }
 
 function multised {
@@ -150,3 +151,5 @@ fi
 if [ "$TMUX" = "" ] && (( $+commands[tmux] )); then
 	tmux attach || tmux new;
 fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
