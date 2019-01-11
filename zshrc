@@ -74,15 +74,18 @@ cdgit() { cd $(gitdir)/$1 }
 
 function gentags {
     local COMMAND="ctags"
+    local ARGS="-R -f ./.git/tags"
     if [[ $PWD = $GOPATH* ]]; then
         if (( $+commands[gotags] )); then
             COMMAND="gotags"
         else
             echo "You may want to install gotags for proper golang tag generation."
         fi
+    else
+        ARGS="$ARGS --tag-relative=yes"
     fi
 
-    $COMMAND -R -f ./.git/tags --tag-relative=yes .
+    $COMMAND $ARGS .
 }
 
 function multised {
