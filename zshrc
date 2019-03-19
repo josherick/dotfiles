@@ -25,7 +25,7 @@ bindkey "^e^e" edit-command-line
 setopt extended_glob
 
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="white"; fi
-PROMPT="%F{024}%B%n%b%{$reset_color%}:%F{255}%B%c%b%{$reset_color%} %(!.#.$) "
+PROMPT="%F{024}%B%n%b%{$reset_color%}@%m:%F{255}%B%c%b%{$reset_color%} %(!.#.$) "
 RPROMPT="[%*]"
 
 # Easily scroll up and down through matches when searching history
