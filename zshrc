@@ -89,7 +89,7 @@ function gentags {
 }
 
 function multised {
-    [ "$#" -eq 2 ] || (echo "Usage: $0 file_suffix sed_command" && return 1)
+    [ "$#" -eq 2 ] || echo "Usage: $0 file_suffix sed_command" && return 1
 
     local files=`find . -type f -name "*$1" -not -path "*/.git/*"`
     echo $files
