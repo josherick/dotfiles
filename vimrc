@@ -9,25 +9,27 @@ Plug 'junegunn/goyo.vim'
 Plug 'sjl/gundo.vim'
 Plug 'SirVer/ultisnips'
 Plug 'scrooloose/nerdcommenter'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
-Plug 'leafgarland/typescript-vim'
 Plug 'kopischke/vim-fetch'
 Plug 'othree/yajs.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdtree'
-"Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'danro/rename.vim'
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+
 
 " Initialize plugin system
 call plug#end()
@@ -104,10 +106,20 @@ set guifont=Menlo:h12
 "set background=dark
 colorscheme hybrid
 
+
+map <leader>ad :ALEDetail<CR>
 map <leader>at :ALEToggle<CR>
 let g:ale_linters = {
 \   'php': [],
+\   'javascript': ['eslint', 'flow-language-server'],
 \}
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\}
+let g:ale_fix_on_save = 1
+
+let g:javascript_plugin_flow = 1
 
 set laststatus=2 " For vim-airline to always show status bar.
 let g:airline#extensions#branch#enabled = 1
@@ -271,23 +283,10 @@ nmap <leader>rr :source $MYVIMRC<CR>
 " Print full file path
 nmap <leader>pwd :echo expand('%:p')<CR>
 
-" Set YCM configuration file.
-let g:ycm_global_ycm_extra_conf = '~/Dropbox/code/.ycm_extra_conf.py'
-let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Werror -Wextra -Wno-unused-variable -pedantic'
-
-" Turn off weird JS autocompletion from YouCompleteMe
-let g:ycm_filetype_specific_completion_to_disable = { 'javascript' : 1 }
-
 " Turn off vim-session autosave prompt
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
 
-" Prefer ag for various things if available.
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ackprg = 'ag --vimgrep'
-
-endif
 " Turn off autocommenting of next line.
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 

@@ -148,6 +148,10 @@ if [ -f "$ZSH_DIR/fzf.zsh" ] && (( $+commands[fzf] )); then
         FILES=`eval $SEARCH_COMMAND | fzf --ansi --multi --reverse --height=40 | awk -F ':' '{print "\""$1":"$2":"$3"\""}' | tr '\n' ' '`
         if [[ -n "$FILES" ]]; then eval "vim $FILES"; fi
     }
+    # Use fd to generate the list for directory completion
+    _fzf_compgen_path() {
+        rg --files --color never "$1"
+    }
 fi
 
 # Run and/or attach to tmux if it's installed and we're not already in it.
