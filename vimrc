@@ -191,6 +191,10 @@ nmap <leader>pil ^"_Dp
 " Remap Y to be consistent with D, C, etc
 nmap Y y$
 
+" Yank filename
+nmap <leader>yfp :let @+ = expand("%")<CR>
+nmap <leader>yfn :let @+ = expand("%:t")<CR>
+
 " Shortcut to turn off syntax highlighting for matches
 nmap <leader>n :noh<CR>
 
