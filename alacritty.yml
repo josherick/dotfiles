@@ -31,6 +31,8 @@ window:
   # Setting this to false will result in window without borders and title bar.
   decorations: full
 
+  opacity: 1
+
 # Display tabs using this many cells (changes require restart)
 tabspaces: 8
 
@@ -153,9 +155,6 @@ colors:
 visual_bell:
   animation: EaseOutExpo
   duration: 0
-
-# Background opacity
-background_opacity: 1.0
 
 # Mouse bindings
 #

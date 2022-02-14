@@ -63,6 +63,14 @@ if [ -d /usr/local/bin ]; then
     export PATH="$PATH:/usr/local/bin"
 fi
 
+if [ -d /opt/homebrew/sbin ]; then
+    export PATH="/opt/homebrew/sbin:$PATH"
+fi
+
+if [ -d /opt/homebrew/bin ]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+fi
+
 export TERM="screen-256color"
 
 alias l="ls -la"
