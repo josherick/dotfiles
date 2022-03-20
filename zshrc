@@ -162,9 +162,4 @@ if [ -f "$ZSH_DIR/fzf.zsh" ] && (( $+commands[fzf] )); then
     }
 fi
 
-# Run and/or attach to tmux if it's installed and we're not already in it.
-if [ "$TMUX" = "" ] && (( $+commands[tmux] )); then
-	tmux attach || tmux new;
-fi
-
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
