@@ -40,11 +40,11 @@ tabspaces: 8
 draw_bold_text_with_bright_colors: true
 
 shell:
-  program: /bin/bash
+  program: /bin/zsh
   args:
     - -l
     - -c
-    - "if [[ -f $HOME/homebrew/bin/tmux ]]; then $HOME/homebrew/bin/tmux attach || $HOME/homebrew/bin/tmux; elif [ command -v tmux >/dev/null 2>&1 ]; then tmux attach || tmux; fi"
+    - "tmux attach || tmux"
 
 # Font configuration (changes require restart)
 font:
