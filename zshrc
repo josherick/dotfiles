@@ -147,9 +147,9 @@ if [ -d "$ZSH_DIR/device-specific" ]; then
     for f in $ZSH_DIR/device-specific/*; do source $f; done
 fi
 
-if [ -f "$ZSH_DIR/git_prompt.zsh" ]; then
-    source "$ZSH_DIR/git_prompt.zsh"
-fi
+#if [ -f "$ZSH_DIR/git_prompt.zsh" ]; then
+    #source "$ZSH_DIR/git_prompt.zsh"
+#fi
 
 if [ -f "$ZSH_DIR/fzf.zsh" ] && (( $+commands[fzf] )); then
     source "$ZSH_DIR/fzf.zsh"
