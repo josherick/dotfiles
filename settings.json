@@ -1,0 +1,110 @@
+{
+    "workbench.colorTheme": "Hybrid",
+    "editor.fontSize": 14,
+    "terminal.integrated.fontSize": 14,
+    "vim.useSystemClipboard": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.cursorSurroundingLines": 5,
+    "vim.highlightedyank.enable": true,
+    "vim.leader": ",",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<CR>"],
+            "after": ["o", "<Esc>", "k"]
+        },
+        {
+            "before": ["Y"],
+            "after": ["y", "$"]
+        },
+        {
+            "before": ["<leader>", "p", "i", "w"],
+            "after": ["\"", "_", "d", "i", "w", "P"]
+        },
+        {
+            "before": ["<leader>", "p", "i", "b"],
+            "after": ["\"", "_", "d", "i", "b", "P"]
+        },
+        {
+            "before": ["<leader>", "p", "i", "t"],
+            "after": ["\"", "_", "d", "i", "t", "P"]
+        },
+        {
+            "before": ["<leader>", "p", "i", "{"],
+            "after": ["\"", "_", "d", "i", "{", "P"]
+        },
+        {
+            "before": ["<leader>", "p", "i", "}"],
+            "after": ["\"", "_", "d", "i", "}", "P"]
+        },
+        {
+            "before": ["<leader>", "p", "i", "("],
+            "after": ["\"", "_", "d", "i", "(", "P"]
+        },
+        {
+            "before": ["<leader>", "p", "i", ")"],
+            "after": ["\"", "_", "d", "i", ")", "P"]
+        },
+        {
+            "before": ["<leader>", "p", "i", "["],
+            "after": ["\"", "_", "d", "i", "[", "P"]
+        },
+        {
+            "before": ["<leader>", "p", "i", "]"],
+            "after": ["\"", "_", "d", "i", "]", "P"]
+        },
+        {
+            "before": ["<leader>", "p", "i", "\""],
+            "after": ["\"", "_", "d", "i", "\"", "P"]
+        },
+        {
+            "before": ["<leader>", "p", "i", "'"],
+            "after": ["\"", "_", "d", "i", "'", "P"]
+        },
+        {
+            "before": ["<leader>", "p", "i", "`"],
+            "after": ["\"", "_", "d", "i", "`", "P"]
+        },
+        {
+            "before": ["<leader>", "."],
+            "commands": ["workbench.action.previousEditor"]
+        },
+        {
+            "before": ["<leader>", "/"],
+            "commands": ["workbench.action.nextEditor"]
+        },
+        {
+            "before": ["<leader>", "b", "q"],
+            "commands": ["workbench.action.closeActiveEditor"]
+        },
+        // {
+        //     "before": ["f"],
+        //     "after": ["<leader>", "<leader>", "f"]
+        // },
+        // {
+        //     "before": ["F"],
+        //     "after": ["<leader>", "<leader>", "f"]
+        // },
+        // {
+        //     "before": ["t"],
+        //     "after": ["<leader>", "<leader>", "t"]
+        // },
+        // {
+        //     "before": ["T"],
+        //     "after": ["<leader>", "<leader>", "T"]
+        // },
+        // {
+        //     "before": ["w"],
+        //     "after": ["<leader>", "<leader>", "w"]
+        // },
+        // {
+        //     "before": ["b"],
+        //     "after": ["<leader>", "<leader>", "b"]
+        // },
+    ],
+    "editor.lineNumbers": "relative",
+    "terminal.integrated.scrollback": 10000,
+    "vim.iskeyword": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?",
+    "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?",
+    "vim.easymotion": true,
+    "vim.commandLineModeKeyBindings": []
+}
