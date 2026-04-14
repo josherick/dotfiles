@@ -40,11 +40,13 @@ bindkey "^B" backward-word
 
 
 # Have LS always display colors
-if ls --color -d ~ >/dev/null 2>&1; then
-    alias ls="ls --color=auto" # GNU ls
+if ls --version >/dev/null 2>&1; then
+    # GNU ls (supports --version)
+    alias ls="ls --color=auto"
 elif ls -G -d ~ >/dev/null 2>&1; then
+    # BSD ls (macOS)
     export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-    alias ls="ls -G" # BSD ls
+    alias ls="ls -G"
 fi
 
 export EDITOR='vim'
@@ -171,3 +173,7 @@ if [ -f "$ZSH_DIR/fzf.zsh" ] && (( $+commands[fzf] )); then
 fi
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+#if command -v tmux &> /dev/null && [ -n "$PS1" ]  && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  #exec tmux new
+#fi
